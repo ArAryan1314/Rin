@@ -1,0 +1,48 @@
+name: Standard CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CI: true
+  SKIP_ENV_VALIDATION: 1
+  NEXT_TELEMETRY_DISABLED: 1
+
+jobs:
+  node-root:
+    name: Node (.)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - name: Use example env
+        run: cp .env.example .env
+      - name: Install
+        run: bun install
+      - name: Format check (report only)
+        continue-on-error: true
+        run: bun run format:check
+      - name: Type-check
+        run: bun run check
+      - name: Test
+        run: bun run test
+      - name: Dependency audit (report only)
+        continue-on-error: true
+        run: bun audit

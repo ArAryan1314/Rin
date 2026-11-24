@@ -1,3 +1,13 @@
+<!-- fork-notice:start -->
+
+> **About this fork:** maintained copy of [openRin/Rin](https://github.com/openRin/Rin), used for learning and integration. All credit for the original work goes to its authors. License: MIT (see `LICENSE`).
+>
+> **Live demo (upstream):** <https://docs.openrin.org>
+>
+> [![Standard CI](https://github.com/ArAryan1314/Rin/actions/workflows/standard-ci.yml/badge.svg)](https://github.com/ArAryan1314/Rin/actions/workflows/standard-ci.yml)
+
+<!-- fork-notice:end -->
+
 ![Cover](./docs/docs/public/rin-logo.png)
 
 English | [简体中文](./README_zh_CN.md)
